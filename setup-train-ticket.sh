@@ -27,9 +27,8 @@ cd /local
 git clone --depth=1 $REPO_URL
 
 # Setup kubernetes cluster
-sudo su
 cd /local/train-ticket/
-make deploy
+sudo make deploy
 
 echo "train-ticket-k8s setup complete"
 
