@@ -14,6 +14,7 @@ logtstart "train-ticket"
 # Variables
 REPO_URL="https://github.com/RoyZhang7/train-ticket.git"
 EBS_URL="https://openebs.github.io/charts"
+GEN_URL="https://github.com/docc-lab/train-ticket-auto-query.git"
 
 echo "setup deathstarbench in k8s"
 
@@ -28,7 +29,11 @@ git clone --depth=1 $REPO_URL
 
 # Setup kubernetes cluster
 cd /local/train-ticket/
-sudo make deploy
+sudo make deploy DeployArgs="--with-tracing"
+
+cd /local
+git clone $GEN_URL
+# TODO: install go then build concurrent version if necessary
 
 echo "train-ticket-k8s setup complete"
 
