@@ -31,9 +31,13 @@ git clone --depth=1 $REPO_URL
 cd /local/train-ticket/
 sudo make deploy DeployArgs="--with-tracing"
 
+# Setup concurrent load generator
 cd /local
 git clone $GEN_URL
-# TODO: install go then build concurrent version if necessary
+sudo apt install -y golang-go
+cd /local/train-ticket-auto-query/tt-concurrent-load-generator
+go mod tidy
+go build
 
 echo "train-ticket-k8s setup complete"
 
