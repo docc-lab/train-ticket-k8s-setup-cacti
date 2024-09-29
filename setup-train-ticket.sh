@@ -16,7 +16,7 @@ REPO_URL="https://github.com/docc-lab/train-ticket.git"
 EBS_URL="https://openebs.github.io/charts"
 GEN_URL="https://github.com/docc-lab/train-ticket-auto-query.git"
 
-echo "setup deathstarbench in k8s"
+echo "setup trainticket in k8s"
 
 # setup dependencies, including local PVC with helm
 sudo helm repo add openebs $EBS_URL
