@@ -35,6 +35,7 @@ if [ "$HOSTNAME" = "node-0" ]; then
 	    exit 1
 	fi
     done
+	sudo su root -c "bash /local/repository/setup-cacti.sh"
 else
     for script in $WORKERNODESCRIPTS ; do
 	cd $SRC
