@@ -12,7 +12,7 @@ fi
 logtstart "train-ticket"
 
 # Variables
-REPO_URL="https://github.com/RoyZhang7/train-ticket.git"
+REPO_URL="https://github.com/docc-lab/train-ticket.git"
 EBS_URL="https://openebs.github.io/charts"
 GEN_URL="https://github.com/docc-lab/train-ticket-auto-query.git"
 

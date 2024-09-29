@@ -2,10 +2,10 @@
 
 ## A. Use the profile to create an experiment.
 
-The cloudlab profile is called [train-ticket-k8s](https://www.cloudlab.us/p/Tracing-Pythia/train-ticket-k8s). 
+Use the cloudlab profile called [train-ticket-k8s](https://www.cloudlab.us/p/Tracing-Pythia/train-ticket-k8s) to create an experiment.
 We only debugged for `with-tracing` make flag for cloudlab k8s setup. If you want to use other component that tt provides, feel free to fork and edit. It would be great if you can PR it back.
 
-After getting email saying setup complete, train-ticket might take extra 15 mins to get ready for all pods. Check `kubectl get pods` till all pods is ready.
+After getting email saying setup complete, train-ticket might take **extra 15 mins** to get ready for all pods. Check `kubectl get pods` till all pods is ready.
 
 ## B. (Optional) Build and use your own docker images from src
 
