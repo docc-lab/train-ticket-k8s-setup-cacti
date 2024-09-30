@@ -82,11 +82,11 @@ We implemented a concurrent version of [train-ticket's auto-query load generater
      ```
 
  2. Use concurrent load generator. 
-    It takes three parameters---IP address of tt-ui-dashboard, # threads you want, # scenarios per thread. So, the # total scenarios = # threads * # scenarios per thread, and each of scenario consists of several consequntial requests (starting from a login request --> query request --> different followup requests)
+    It takes three parameters---IP address of tt-ui-dashboard, basedate for randomized ticket query, # threads you want, # scenarios per thread. So, the # total scenarios = # threads * # scenarios per thread, and each of scenario consists of several consequntial requests (starting from a login request --> query request --> different followup requests)
 
      ```bash
      cd /local/train-ticket-auto-query/tt-concurrent-load-generator
-     ./tt-concurrent-load-generator <TRAIN_TICKET_UI_IPADDR> <NUM_THREAD> <NUM_SCENARIOS_PER_THREAD>
+     ./tt-concurrent-load-generator <TRAIN_TICKET_UI_IPADDR> <BASE_DATE> <NUM_THREAD> <NUM_SCENARIOS_PER_THREAD>
      ```
 
  3. Check load generator logs & results
