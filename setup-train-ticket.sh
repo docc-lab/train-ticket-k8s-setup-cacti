@@ -25,9 +25,12 @@ sudo helm install openebs --namespace openebs openebs/openebs --create-namespace
 
 # Clone the repository
 cd /local
-git clone --depth=1 $REPO_URL
+git clone $REPO_URL
 
 # Setup kubernetes cluster
+kubectl label nodes node-1 skywalking=true # Setup dedicated node for skywalking
+kubectl taint nodes node-1 dedicated=skywalking:NoSchedule
+
 cd /local/train-ticket/
 sudo make deploy DeployArgs="--with-tracing"
 
