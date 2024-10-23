@@ -34,6 +34,9 @@ kubectl taint nodes node-1 dedicated=skywalking:NoSchedule
 cd /local/train-ticket/
 sudo make deploy DeployArgs="--with-tracing"
 
+# Replace buggy travel seervice with fixed image
+kubectl set image "deployment/ts-travel-service" "ts-travel-service=docclabgroup/ts-travel-service:cacti-exp0.2"
+
 # Setup concurrent load generator
 cd /local
 git clone $GEN_URL
