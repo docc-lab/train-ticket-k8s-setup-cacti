@@ -25,7 +25,7 @@ sudo helm install openebs --namespace openebs openebs/openebs --create-namespace
 
 # Clone the repository
 cd /local
-git clone $REPO_URL
+git clone -b cacti-exp $REPO_URL
 
 # Setup kubernetes cluster
 kubectl label nodes node-1 skywalking=true # Setup dedicated node for skywalking
