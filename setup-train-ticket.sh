@@ -36,6 +36,7 @@ sudo make deploy DeployArgs="--with-tracing"
 
 # Replace buggy travel seervice with fixed image
 kubectl set image "deployment/ts-travel-service" "ts-travel-service=docclabgroup/ts-travel-service:cacti-exp0.2"
+kubectl set image "deployment/ts-order-service" "ts-order-service=docclabgroup/ts-order-service:cacti-exp0.5"
 
 # Setup concurrent load generator
 cd /local
