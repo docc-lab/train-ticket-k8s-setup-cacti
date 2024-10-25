@@ -45,6 +45,9 @@ cd /local/train-ticket-auto-query/tt-concurrent-load-generator
 go mod tidy
 go build
 
+# Install maven for building train-ticket
+sudo apt install -y maven
+
 echo "train-ticket-k8s setup complete"
 
 logtend "train-ticket"
