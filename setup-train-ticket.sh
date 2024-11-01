@@ -35,8 +35,11 @@ cd /local/train-ticket/
 sudo make deploy DeployArgs="--with-tracing"
 
 # Replace buggy travel seervice with fixed image
-kubectl set image "deployment/ts-travel-service" "ts-travel-service=docclabgroup/ts-travel-service:cacti-exp0.2"
-kubectl set image "deployment/ts-order-service" "ts-order-service=docclabgroup/ts-order-service:cacti-exp0.5"
+kubectl set image "deployment/ts-travel-service" "ts-travel-service=docclabgroup/ts-travel-service:cacti-exp1.0"
+kubectl set image "deployment/ts-order-service" "ts-order-service=docclabgroup/ts-order-service:cacti-exp1.0"
+kubectl set image "deployment/ts-gateway-service" "ts-gateway-service=docclabgroup/ts-gateway-service:cacti-exp1.0"
+kubectl set image "deployment/ts-cancel-service" "ts-cancel-service=docclabgroup/ts-cancel-service:exp-dev0.1"
+kubectl set image "deployment/ts-basic-service" "ts-basic-service=docclabgroup/ts-basic-service:exp-dev0.2"
 
 # Setup concurrent load generator
 cd /local
