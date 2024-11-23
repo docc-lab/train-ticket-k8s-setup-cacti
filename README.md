@@ -9,7 +9,22 @@ After getting email saying setup complete, train-ticket might take **extra 15 mi
 
 ## B. (Optional) Build and use your own docker images from src
 
-TODO
+We provide script integrating the following steps. You may use the `prepare-victime-service.sh` under `/local/train-ticket-auto-query`. It contains several steps for our exp, you might need to remove unnecessary part or modify for your need.
+
+Without using above script, build new jars with `mvn clean install` under trainticket dir, and then build docker image and replace desired pod with new image:
+
+```bash
+
+# Build and push the Docker image
+docker build -t "<your-image-registry>/<your-updated-service>:<your-image-tag>" .
+docker push "<your-image-registry>/<your-updated-service>:<your-image-tag>"
+
+# Update the Kubernetes deployment
+kubectl set image "deployment/<your-updated-service>" "<your-updated-service>=<your-image-registry>/<your-updated-service>:<your-image-tag>"
+
+# Wait for the rollout to complete
+kubectl rollout status "deployment/<your-updated-service>"
+```
 
 ## C. Check TrainTicket Web UI
 
@@ -52,7 +67,7 @@ TODO
             // Your condition parameters here
             }
         }
-    }' http://YOUR_SW_IP:12800/graphql
+    }' http://<YOUR_SW_IP>:12800/graphql
 
     # concrete example
     curl -X POST -H "Content-Type: application/json" -d '{
@@ -81,13 +96,16 @@ We implemented a concurrent version of [train-ticket's auto-query load generater
      kubectl get services | grep ts-ui-dashboard
      ```
 
- 2. Use concurrent load generator. 
-    It takes three parameters---IP address of tt-ui-dashboard, basedate for randomized ticket query, # threads you want, # scenarios per thread. So, the # total scenarios = # threads * # scenarios per thread, and each of scenario consists of several consequntial requests (starting from a login request --> query request --> different followup requests)
+ 2. Populate the DB with warmup mode of concurrent load generator. Call it with `-warmup` flag to find the usage:
+     ```bash
+    cd /local/train-ticket-auto-query/tt-concurrent-load-generator
+    ./tt-concurrent-load-generator -warmup
+     ```
+
+ 3. Use concurrent load generator. 
+    We have been updating the API and functionality of it, so directly call it for usage info.
 
      ```bash
      cd /local/train-ticket-auto-query/tt-concurrent-load-generator
-     ./tt-concurrent-load-generator <TRAIN_TICKET_UI_IPADDR> <BASE_DATE> <NUM_THREAD> <NUM_SCENARIOS_PER_THREAD>
+     ./tt-concurrent-load-generator
      ```
-
- 3. Check load generator logs & results
-TODO

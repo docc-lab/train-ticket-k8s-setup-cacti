@@ -25,7 +25,7 @@ sudo helm install openebs --namespace openebs openebs/openebs --create-namespace
 
 # Clone the repository
 cd /local
-git clone $REPO_URL
+git clone -b cacti-exp $REPO_URL
 
 # Setup kubernetes cluster
 kubectl label nodes node-1 skywalking=true # Setup dedicated node for skywalking
@@ -34,6 +34,13 @@ kubectl taint nodes node-1 dedicated=skywalking:NoSchedule
 cd /local/train-ticket/
 sudo make deploy DeployArgs="--with-tracing"
 
+# Replace buggy travel seervice with fixed image
+kubectl set image "deployment/ts-travel-service" "ts-travel-service=docclabgroup/ts-travel-service:cacti-exp1.0"
+kubectl set image "deployment/ts-order-service" "ts-order-service=docclabgroup/ts-order-service:cacti-exp1.0"
+kubectl set image "deployment/ts-gateway-service" "ts-gateway-service=docclabgroup/ts-gateway-service:cacti-exp1.0"
+kubectl set image "deployment/ts-cancel-service" "ts-cancel-service=docclabgroup/ts-cancel-service:exp-dev0.1"
+kubectl set image "deployment/ts-basic-service" "ts-basic-service=docclabgroup/ts-basic-service:exp-dev0.2"
+
 # Setup concurrent load generator
 cd /local
 git clone $GEN_URL
@@ -41,6 +48,9 @@ sudo apt install -y golang-go
 cd /local/train-ticket-auto-query/tt-concurrent-load-generator
 go mod tidy
 go build
+
+# Install maven for building train-ticket
+sudo apt install -y maven
 
 echo "train-ticket-k8s setup complete"
 
